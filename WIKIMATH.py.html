@@ -1,0 +1,35 @@
+
+# coding: utf-8
+
+# In[3]:
+
+
+import pandas as pd
+import seaborn as sns
+get_ipython().run_line_magic('config', "InlineBackend.figure_format = 'svg'")
+get_ipython().run_line_magic('matplotlib', 'inline')
+tables = pd.read_html("https://en.wikipedia.org/w/index.php?title=Moscow&oldid=683872744", header=1)
+
+table = tables[4]
+table
+
+
+# In[4]:
+
+
+table.drop(11, inplace=True)
+table.Year=table.Year.astype(float)
+table.plot(x='Year', y='Pop.')
+
+
+# In[5]:
+
+
+sns.lmplot(x='Year', y='Pop.', data=table)
+
+
+# In[6]:
+
+
+sns.lmplot(x='Year', y='Pop.', data=table, order=2)
+

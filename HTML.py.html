@@ -1,0 +1,60 @@
+
+# coding: utf-8
+
+# In[8]:
+
+
+import requests
+r = requests.get('https://www.yandex.ru')
+print(r.text)
+
+
+# In[9]:
+
+
+from bs4 import BeautifulSoup
+
+
+# In[10]:
+
+
+page = BeautifulSoup(r.text, 'html.parser')
+
+
+# In[11]:
+
+
+page
+
+
+# In[13]:
+
+
+page.div
+
+
+# In[14]:
+
+
+page.html['lang']
+
+
+# In[15]:
+
+
+r = requests.get('https://www.yandex.ru')
+page = BeautifulSoup(r.text, 'html.parser')
+
+
+# In[16]:
+
+
+page('a')
+
+
+# In[17]:
+
+
+for link in page("a"):
+    print(link['href'])
+

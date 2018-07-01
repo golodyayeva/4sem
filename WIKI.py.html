@@ -1,0 +1,36 @@
+
+# coding: utf-8
+
+# In[4]:
+
+
+from bs4 import BeautifulSoup
+import requests
+url = "https://ru.wikipedia.org/w/index.php?oldid=75475510"
+g = requests.get(url)
+g.ok
+
+
+# In[5]:
+
+
+page = BeautifulSoup(g.text, "html.parser")
+for link in page.findAll("a", class_='external'):
+    print(link['href'])
+
+
+# In[7]:
+
+
+
+divs = page.findAll('div', class_='references-small')
+len(divs)
+
+
+# In[9]:
+
+
+div = page.findAll('div', class_='references-small')[0]
+for link in div("a")[0:15]:
+    print(link['href'])
+
