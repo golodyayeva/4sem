@@ -1,0 +1,53 @@
+
+# coding: utf-8
+
+# In[32]:
+
+
+import time
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+
+import random
+
+login = '#'
+pas = '#'
+mes = ['Добро пожаловать.']#сообщения
+
+
+# In[33]:
+
+
+driver = webdriver.Chrome(executable_path='/Users/admin/Downloads/chromedriver.exe')
+driver.set_window_size(1366, 768)
+driver.implicitly_wait(20)
+driver.get('https://vk.com')
+time.sleep(10)
+username = driver.find_element_by_id('index_email')
+username.clear()
+username.send_keys(login)
+password = driver.find_element_by_id('index_pass')
+password.clear()
+password.send_keys(pas)
+log = driver.find_element_by_id('index_login_button')
+log.click()
+
+
+# In[34]:
+
+
+i = 0
+while i < 3:
+    me = random.choice(mes)
+    driver.get('https://vk.com/#')
+    message_op = driver.find_element_by_class_name('profile_btn_cut_left')
+    message_op.click()
+    text = driver.find_element_by_id('mail_box_editable')
+    text.send_keys(mes)
+    send = driver.find_element_by_class_name('mail_box_send_btn')
+    send.click()
+    time.sleep(10)
+    i = i+1
+
